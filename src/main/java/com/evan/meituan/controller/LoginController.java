@@ -4,11 +4,8 @@ import com.evan.meituan.pojo.Result;
 import com.evan.meituan.pojo.User;
 import com.evan.meituan.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.util.HtmlUtils;
-
-import java.util.Objects;
 
 @RestController
 public class LoginController {
@@ -17,7 +14,7 @@ public class LoginController {
 
 
     @PostMapping(value = "api/login")
-    public Result login(@RequestBody User requestUser) {
+    public User login(@RequestBody User requestUser) {
         // 对 html 标签进行转义，防止 XSS 攻击
         String username = requestUser.getUsername();
         username = HtmlUtils.htmlEscape(username);
@@ -25,9 +22,10 @@ public class LoginController {
 
         User user = userService.get(username, requestUser.getPassword());
         if (null == user) {
-            return new Result(400);
+            return null;
         } else {
-            return new Result(200);
+           User  u = userService.getByName(username);
+            return u;
         }
     }
     @PostMapping(value = "api/register")
@@ -42,5 +40,10 @@ public class LoginController {
             return new Result(200);
         }
 
+    }
+    @PostMapping(value = "api/upavatar")
+    public String avatarUpload(){
+        String url="https://fuss10.elemecdn.com/e/5d/4a731a90594a4af544c0c25941171jpeg.jpeg";
+        return url;
     }
 }

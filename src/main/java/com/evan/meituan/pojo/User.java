@@ -17,6 +17,10 @@ public class User {
     String username;
     String password;
     String email;
+
+
+
+    String photo;
     int role;
     public int getId() {
         return id;
@@ -56,5 +60,11 @@ public class User {
     public void setRole(int role) {
         this.role = role;
     }
+    public String getPhoto() {
+        return photo;
+    }
 
+    public void setPhoto(String photo) {
+        this.photo = photo;
+    }
 }
