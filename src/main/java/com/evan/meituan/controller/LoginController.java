@@ -3,9 +3,15 @@ package com.evan.meituan.controller;
 import com.evan.meituan.pojo.Result;
 import com.evan.meituan.pojo.User;
 import com.evan.meituan.service.UserService;
+import com.evan.meituan.utils.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.util.HtmlUtils;
+
+import java.io.File;
+import java.io.IOException;
+import java.util.Date;
 
 @RestController
 public class LoginController {
@@ -42,8 +48,25 @@ public class LoginController {
 
     }
     @PostMapping(value = "api/upavatar")
-    public String avatarUpload(){
-        String url="https://fuss10.elemecdn.com/e/5d/4a731a90594a4af544c0c25941171jpeg.jpeg";
-        return url;
+    public String avatarUpload(MultipartFile file) throws Exception{
+        String folder = "D:/imgService";
+        File imageFolder = new File(folder);
+
+        //获取当前时间戳和随机数拼接避免重名
+        String date = String.valueOf(new Date().getTime());
+
+        //后面-4是保留文件后缀
+        File f = new File(imageFolder, StringUtils.getRandomString(6)+date+ file.getOriginalFilename()
+                .substring(file.getOriginalFilename().length() - 4));
+        if (!f.getParentFile().exists())
+            f.getParentFile().mkdirs();
+        try {
+            file.transferTo(f);
+            String imgURL = "http://image.mt.com/" + f.getName();
+            return imgURL;
+        } catch (IOException e) {
+            e.printStackTrace();
+            return "";
+        }
     }
 }

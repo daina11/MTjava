@@ -1,5 +1,7 @@
 package com.evan.meituan.pojo;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import org.hibernate.annotations.DynamicInsert;
+import org.hibernate.annotations.DynamicUpdate;
 
 import javax.persistence.*;
 
@@ -18,9 +20,9 @@ public class User {
     String password;
     String email;
 
+//    设置默认值
+    String photo="http://image.mt.com/3ea6beec64369c2642b92c6726f1epng.png";
 
-
-    String photo;
     int role;
     public int getId() {
         return id;
@@ -60,6 +62,7 @@ public class User {
     public void setRole(int role) {
         this.role = role;
     }
+
     public String getPhoto() {
         return photo;
     }
