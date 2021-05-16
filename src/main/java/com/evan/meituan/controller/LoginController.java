@@ -47,8 +47,14 @@ public class LoginController {
         }
 
     }
+    String imgUrl;
     @PostMapping(value = "api/upavatar")
+
     public String avatarUpload(MultipartFile file) throws Exception{
+//        String username = user.getUsername();
+//        username = HtmlUtils.htmlEscape(username);
+//        System.out.println(username);
+
         String folder = "D:/imgService";
         File imageFolder = new File(folder);
 
@@ -63,10 +69,25 @@ public class LoginController {
         try {
             file.transferTo(f);
             String imgURL = "http://image.mt.com/" + f.getName();
+
+            //把图片链接赋值给全局变量
+            imgUrl=imgURL;
             return imgURL;
         } catch (IOException e) {
             e.printStackTrace();
             return "";
         }
+    }
+    @PostMapping(value = "api/editinfo")
+    public User editInfo (@RequestBody User user){
+        String username = user.getUsername() ;
+
+        //把图片链接存储到数据库
+        User  u= userService.getByName(username);
+        u.setPhoto(imgUrl);
+        //修改数据库
+        userService.add(u);
+
+        return u;
     }
 }
