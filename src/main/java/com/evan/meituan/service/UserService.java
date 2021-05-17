@@ -13,6 +13,11 @@ public class UserService {
         User user = getByName(username);
         return null!=user;
     }
+    public User getById(Integer id){
+//       findById(String id).get();2.x.x版本后需要.get()才能得到实体对象，注意 id未查询到对应实体时会报错
+//        加.orElse(null)找不到数据会返回null
+        return userDAO.findById(id).orElse(null);
+    }
 
     public User getByName(String username) {
         return userDAO.findByUsername(username);

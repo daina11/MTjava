@@ -78,6 +78,7 @@ public class LoginController {
             return "";
         }
     }
+    /*修改头像*/
     @PostMapping(value = "api/editinfo")
     public User editInfo (@RequestBody User user){
         String username = user.getUsername() ;
@@ -89,5 +90,24 @@ public class LoginController {
         userService.add(u);
 
         return u;
+    }
+    /*修改基本信息*/
+    @PostMapping(value = "api/edinfoForm")
+    public User edinfoForm (@RequestBody User user){
+        String username = user.getUsername() ;
+        int id  =user.getId();
+        username = HtmlUtils.htmlEscape(username);
+
+        if(userService.isExist(username)){
+
+            return null;
+        }else {
+            User  u= userService.getById(id);
+            u.setEmail(user.getEmail());
+            u.setUsername(username);
+            userService.add(u);
+            return u;
+        }
+
     }
 }
