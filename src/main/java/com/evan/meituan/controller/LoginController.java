@@ -18,7 +18,6 @@ public class LoginController {
     @Autowired
     UserService userService;
 
-
     @PostMapping(value = "api/login")
     public User login(@RequestBody User requestUser) {
         // 对 html 标签进行转义，防止 XSS 攻击
