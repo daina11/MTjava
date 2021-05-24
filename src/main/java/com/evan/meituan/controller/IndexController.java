@@ -6,27 +6,30 @@ import com.evan.meituan.pojo.Shopcategory;
 import com.evan.meituan.pojo.User;
 import com.evan.meituan.service.ShopcategoryService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
 import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
 
 /*
         首页的一些*/
 @RestController
 public class IndexController {
-        @Autowired
-        ShopcategoryService shopcategoryService;
-        @PostMapping(value = "api/h")
-        public Shopcategory getByid(@RequestBody Shopcategory sp){
-               int id= (int) sp.getId();
-                System.out.println(11111);
-                System.out.println(id);
-                Shopcategory s =shopcategoryService.getByid(id);
-                System.out.println(s);
-                return s;
+    @Autowired
+    ShopcategoryService shopcategoryService;
 
-        }
-        @PostMapping("/aa")
-        public Shopcategory a(@RequestBody Shopcategory s){
-                int id = s.getId();
-                return shopcategoryService.getByid(id);
-        }
+    @PostMapping(value = "api/h")
+    public Shopcategory getByid(@RequestBody Shopcategory sp) {
+        int id = (int) sp.getId();
+        Shopcategory s = shopcategoryService.getByid(id);
+        return s;
+
+    }
+
+    /*查询首页顶部所有分类*/
+    @PostMapping(value = "api/ShopCategoryAll")
+    public Page getAll() {
+        Page all = shopcategoryService.getAll();
+        return all;
+    }
 }
