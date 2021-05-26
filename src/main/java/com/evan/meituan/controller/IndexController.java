@@ -1,15 +1,14 @@
 package com.evan.meituan.controller;
 
-import com.evan.meituan.dao.ShopcategoryDao;
-import com.evan.meituan.pojo.Result;
 import com.evan.meituan.pojo.Shopcategory;
-import com.evan.meituan.pojo.User;
+import com.evan.meituan.service.GoodslistService;
 import com.evan.meituan.service.ShopcategoryService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.List;
+import java.util.Collection;
+import java.util.Map;
 
 /*
         首页的一些*/
@@ -17,6 +16,8 @@ import java.util.List;
 public class IndexController {
     @Autowired
     ShopcategoryService shopcategoryService;
+    @Autowired
+    GoodslistService goodslistService;
 
     @PostMapping(value = "api/h")
     public Shopcategory getByid(@RequestBody Shopcategory sp) {
@@ -31,5 +32,15 @@ public class IndexController {
     public Page getAll() {
         Page all = shopcategoryService.getAll();
         return all;
+    }
+
+    /*首页商品列表*/
+    @PostMapping(value = "api/getIndexGoodsList")
+    public Page getIndexGoodsList(@RequestBody Map<String, Object> page) {
+        /*用map来接收前端传来的page*/
+        int p = (int) page.get("page");
+        Page goodslist = goodslistService.getIndexGoodslist(p);
+        return goodslist;
+
     }
 }
