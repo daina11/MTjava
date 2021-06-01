@@ -20,4 +20,9 @@ public class GoodslistService {
         Goodslist gl = goodslistDao.findAllById(1);
         return gl;
     }
+    //分类获取商品
+    public Page getGoodsByCid(int cid,int page){
+        Page list = goodslistDao.findAllByCid(cid,PageRequest.of(page, 2));
+        return list;
+    }
 }

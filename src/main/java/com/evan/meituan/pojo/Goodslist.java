@@ -18,7 +18,7 @@ public class Goodslist {
   private int sid;
   private int cid;
   private String goodimg;
-  private String location;
+
   public int getId() {
     return id;
   }
@@ -85,11 +85,5 @@ public class Goodslist {
 
   private int scid;
 
-  public String getLocation() {
-    return location;
-  }
 
-  public void setLocation(String location) {
-    this.location = location;
-  }
 }
