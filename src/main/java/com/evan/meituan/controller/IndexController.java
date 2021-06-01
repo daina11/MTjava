@@ -43,15 +43,5 @@ public class IndexController {
         return goodslist;
 
     }
-    @PostMapping(value = "api/getGoodsListBycid")
-    public Page getGoodsBycid(@RequestBody Map<String, Object> ci) {
-        /*用map来接收前端传来的page*/
-        //int c = (int) ci.get("cid");
-        //System.out.println(c);
-        int p =(int) ci.get("page");
-        System.out.println(p);
-        Page goodslist = goodslistService.getGoodsByCid(2,p);
-        return goodslist;
 
-    }
 }

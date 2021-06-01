@@ -15,7 +15,11 @@ public class Goodslist {
   private String name;
   private double price;
   private int store;
-  private int sid;
+
+  @ManyToOne(fetch = FetchType.EAGER)
+  @JoinColumn(name = "sid")
+  private Shop shop;
+
   private int cid;
   private String goodimg;
 
@@ -51,12 +55,12 @@ public class Goodslist {
     this.store = store;
   }
 
-  public int getSid() {
-    return sid;
+  public Shop getShop() {
+    return shop;
   }
 
-  public void setSid(int sid) {
-    this.sid = sid;
+  public void setShop(Shop shop) {
+    this.shop = shop;
   }
 
   public int getCid() {

@@ -22,7 +22,7 @@ public class GoodslistService {
     }
     //分类获取商品
     public Page getGoodsByCid(int cid,int page){
-        Page list = goodslistDao.findAllByCid(cid,PageRequest.of(page, 2));
+        Page list = goodslistDao.findAllByCid(cid,PageRequest.of(page, 5));
         return list;
     }
 }
