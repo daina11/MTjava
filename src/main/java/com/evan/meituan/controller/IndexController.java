@@ -2,6 +2,7 @@ package com.evan.meituan.controller;
 
 import com.evan.meituan.pojo.Shopcategory;
 import com.evan.meituan.service.GoodslistService;
+import com.evan.meituan.service.ShopService;
 import com.evan.meituan.service.ShopcategoryService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
@@ -18,8 +19,10 @@ public class IndexController {
     ShopcategoryService shopcategoryService;
     @Autowired
     GoodslistService goodslistService;
+    @Autowired
+    ShopService shopService;
 
-    @PostMapping(value = "api/h")
+    @PostMapping(value = "api/getShopcategoryByid")
     public Shopcategory getByid(@RequestBody Shopcategory sp) {
         int id = (int) sp.getId();
         Shopcategory s = shopcategoryService.getByid(id);
@@ -34,14 +37,15 @@ public class IndexController {
         return all;
     }
 
-    /*首页商品列表*/
+    /*首页商店列表*/
     @PostMapping(value = "api/getIndexGoodsList")
-    public Page getIndexGoodsList(@RequestBody Map<String, Object> page) {
+    public Page getIndexShopsList(@RequestBody Map<String, Object> page) {
         /*用map来接收前端传来的page*/
         int p = (int) page.get("page");
-        Page goodslist = goodslistService.getIndexGoodslist(p);
+        Page goodslist = shopService.getIndexShopslist(p);
         return goodslist;
 
     }
+
 
 }
