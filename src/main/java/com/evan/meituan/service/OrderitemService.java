@@ -4,6 +4,8 @@ import com.evan.meituan.pojo.Orderitem;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 @Service
 public class OrderitemService {
     @Autowired
@@ -18,5 +20,8 @@ public class OrderitemService {
     }
     public void deletBid(int id){
         orderitemDao.deleteById(id);
+    }
+    public List<Orderitem> getAllByUid(int uid){
+        return orderitemDao.findAllByUid(uid);
     }
 }

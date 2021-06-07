@@ -4,8 +4,8 @@ package com.evan.meituan.pojo;
 import javax.persistence.*;
 
 @Entity
-@Table(name="shopcategory")
-public class Shopcategory {
+@Table(name="goodcategory")
+public class Goodcategory {
   @Id
   @GeneratedValue(strategy = GenerationType.IDENTITY)
   @Column(name = "id")

@@ -2,10 +2,9 @@ package com.evan.meituan.controller;
 
 import com.evan.meituan.pojo.Orderitem;
 import com.evan.meituan.pojo.Result;
-import com.evan.meituan.pojo.Shopcategory;
 import com.evan.meituan.service.GoodslistService;
 import com.evan.meituan.service.OrderitemService;
-import com.evan.meituan.service.ShopcategoryService;
+import com.evan.meituan.service.GoodcategoryService;
 import net.sf.json.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
@@ -22,7 +21,7 @@ public class GoodsIndexController {
     @Autowired
     OrderitemService orderitemService;
     @Autowired
-    ShopcategoryService shopcategoryService;
+    GoodcategoryService goodcategoryService;
 
     /*
     根据分类来获取商品
@@ -54,8 +53,9 @@ public class GoodsIndexController {
                     newresult.add(result.get(i));
                 }
             }
+
             //循环读取数组中的每条数据
-            for (int i = 0; i < newresult.size(); i++) {
+            for (int i = 1; i < newresult.size(); i++) {
                 //先把传过来的json数组转成json对象再转换成orderitem对象
                 JSONObject jsonObject = JSONObject.fromObject(newresult.get(i));
                 Orderitem o = (Orderitem) JSONObject.toBean(jsonObject, Orderitem.class);

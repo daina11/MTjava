@@ -20,7 +20,15 @@ public class Orderitem {
   private double goodsprice;
   private double goodsamout;
   private int uid;
+  private  String goodname;
 
+  public String getGoodname() {
+    return goodname;
+  }
+
+  public void setGoodname(String goodname) {
+    this.goodname = goodname;
+  }
 
   public int getId() {
     return id;
