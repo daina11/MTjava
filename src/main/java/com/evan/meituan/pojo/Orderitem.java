@@ -14,13 +14,13 @@ public class Orderitem {
   @Id
   @Column(name = "id")
   private int id;
-  private int orderid;
   private int goodsnumber;
   private int goodsid;
   private double goodsprice;
   private double goodsamout;
   private int uid;
   private  String goodname;
+
 
   public String getGoodname() {
     return goodname;
@@ -39,13 +39,6 @@ public class Orderitem {
   }
 
 
-  public int getOrderid() {
-    return orderid;
-  }
-
-  public void setOrderid(int orderid) {
-    this.orderid = orderid;
-  }
 
 
   public int getGoodsnumber() {

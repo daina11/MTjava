@@ -51,11 +51,11 @@ public class GoodsIndexController {
 
                 } else {
                     newresult.add(result.get(i));
+
                 }
             }
-
             //循环读取数组中的每条数据
-            for (int i = 1; i < newresult.size(); i++) {
+            for (int i = 0; i < newresult.size(); i++) {
                 //先把传过来的json数组转成json对象再转换成orderitem对象
                 JSONObject jsonObject = JSONObject.fromObject(newresult.get(i));
                 Orderitem o = (Orderitem) JSONObject.toBean(jsonObject, Orderitem.class);
@@ -69,10 +69,18 @@ public class GoodsIndexController {
                     orderitemService.addOrderItem(o);
                 }
             }
-        }catch (Exception e){
+        } catch (Exception e) {
 
         }
-
         return new Result(200);
+    }
+   /*
+    删除购物清单中的商品
+    */
+    @PostMapping(value = "api/deleteOrderItem")
+    public Orderitem deleteOrderIten(@RequestBody Map<String, Object> oi) {
+        int c = (int) oi.get("itemid");
+        orderitemService.deletBid(c);
+        return null;
     }
 }

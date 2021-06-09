@@ -3,49 +3,51 @@ package com.evan.meituan.pojo;
 import javax.persistence.*;
 
 @Entity
-@Table(name="order")
+@Table(name="userorder")
 public class Order {
   @Id
+  @GeneratedValue(strategy = GenerationType.IDENTITY)
   @Column(name = "id")
-  private long id;
-  private long uid;
-  private String time;
-  private long status;
+  private int id;
+  private int uid;
+  private String ordertime;
 
-
-  public long getId() {
+  public int getId() {
     return id;
   }
 
-  public void setId(long id) {
+  public void setId(int id) {
     this.id = id;
   }
 
-
-  public long getUid() {
+  public int getUid() {
     return uid;
   }
 
-  public void setUid(long uid) {
+  public void setUid(int uid) {
     this.uid = uid;
   }
 
-
-  public String getTime() {
-    return time;
+  public String getOrdertime() {
+    return ordertime;
   }
 
-  public void setTime(String time) {
-    this.time = time;
+  public void setOrdertime(String ordertime) {
+    this.ordertime = ordertime;
   }
 
-
-  public long getStatus() {
-    return status;
+  public String getGoodsid() {
+    return goodsid;
   }
 
-  public void setStatus(long status) {
-    this.status = status;
+  public void setGoodsid(String goodsid) {
+    this.goodsid = goodsid;
   }
+
+  private String goodsid;
+
+
+
+
 
 }
