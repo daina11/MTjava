@@ -20,7 +20,15 @@ public class Orderitem {
   private double goodsamout;
   private int uid;
   private  String goodname;
+  private  int status;
 
+  public int getStatus() {
+    return status;
+  }
+
+  public void setStatus(int status) {
+    this.status = status;
+  }
 
   public String getGoodname() {
     return goodname;

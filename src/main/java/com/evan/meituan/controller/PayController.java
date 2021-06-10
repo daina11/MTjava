@@ -22,7 +22,7 @@ public class PayController {
     @PostMapping(value = "api/getPayItem")
     public List<Orderitem> getPayItem(@RequestBody Map<String, Object> map) {
         int uid = (int)map.get("uid");
-        List<Orderitem> item = orderitemService.getAllByUid(uid);
+        List<Orderitem> item = orderitemService.getAllByUidAndStatis(uid,0);
 
         return item;
     }

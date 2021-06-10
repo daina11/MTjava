@@ -62,7 +62,7 @@ public class GoodsIndexController {
                 //uid和goodid存在时候修改  查询出该条数据获取id然后存储
 
                 try {
-                    Orderitem order = orderitemService.getByGidAndUid(o.getGoodsid(), o.getUid());
+                    Orderitem order = orderitemService.getAllByUidAndGoodidAndStatus(o.getGoodsid(), o.getUid(),0);
                     o.setId(order.getId());
                     orderitemService.addOrderItem(o);
                 } catch (Exception e) {
@@ -83,4 +83,6 @@ public class GoodsIndexController {
         orderitemService.deletBid(c);
         return null;
     }
+
+
 }

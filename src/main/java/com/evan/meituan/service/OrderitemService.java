@@ -31,4 +31,11 @@ public class OrderitemService {
     public List<Orderitem> getAllByUid(int uid) {
         return orderitemDao.findAllByUid(uid);
     }
+
+    public List<Orderitem> getAllByUidAndStatis(int uid,int s){
+        return orderitemDao.findAllByUidAndStatus(uid,s);
+    }
+    public Orderitem getAllByUidAndGoodidAndStatus(int uid,int gid,int s){
+        return orderitemDao.findAllByUidAndGoodsidAndStatus(uid,gid,s);
+    }
 }
