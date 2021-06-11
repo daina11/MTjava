@@ -30,4 +30,9 @@ public class GoodslistService {
         Page list = goodslistDao.findAllByScid(scid,PageRequest.of(page, 5));
         return list;
     }
+
+    public Page getGoodsBysid(int sid,int page){
+        Page l  = goodslistDao.findAllBySid(sid,PageRequest.of(page, 5));
+        return l;
+    }
 }

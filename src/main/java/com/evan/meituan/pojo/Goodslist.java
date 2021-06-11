@@ -16,15 +16,23 @@ public class Goodslist {
   private double price;
   private int store;
 
-  @ManyToOne(fetch = FetchType.EAGER)
-  @JoinColumn(name = "sid")
-  private Shop shop;
 
+  private int sid;
   private int cid;
   private String goodimg;
 
   public int getId() {
     return id;
+  }
+  @ManyToOne(fetch=FetchType.LAZY)
+  @JoinColumn(name = "sid", referencedColumnName = "id", insertable = false, updatable = false)
+  private Shop shop;
+  public int getSid() {
+    return sid;
+  }
+
+  public void setSid(int sid) {
+    this.sid = sid;
   }
 
   public void setId(int id) {

@@ -104,9 +104,11 @@ public class GoodsIndexController {
         int sc = (int) ci.get("scid");
         //System.out.println(c);
         int p = (int) ci.get("page");
+        int sid = (int) ci.get("sid");
         if(sc==0){
             //查询该商店所有商品
-            return null;
+            Page l = goodslistService.getGoodsBysid(sid,p);
+            return l;
         }else{
             Page l = goodslistService.getGoodsByscid(sc,p);
             return l;

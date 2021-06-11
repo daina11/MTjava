@@ -10,4 +10,5 @@ public interface GoodslistDao extends JpaRepository<Goodslist,Integer>{
     Page<Goodslist> findAll(Pageable pageable);
     Page<Goodslist> findAllByCid(int cid,Pageable pageable);
     Page<Goodslist> findAllByScid(int scid,Pageable pageable);
+    Page<Goodslist> findAllBySid(int sid,Pageable pageable);
 }
