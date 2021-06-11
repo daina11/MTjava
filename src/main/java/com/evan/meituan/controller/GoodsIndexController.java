@@ -49,7 +49,10 @@ public class GoodsIndexController {
             for (int i = 0; i < result.size(); i++) {
                 if (result.get(i).equals(null)) {
 
-                } else {
+                } else if(result.get(i).toString().equals("[]")){
+
+                }
+                else {
                     newresult.add(result.get(i));
 
                 }
@@ -60,14 +63,18 @@ public class GoodsIndexController {
                 JSONObject jsonObject = JSONObject.fromObject(newresult.get(i));
                 Orderitem o = (Orderitem) JSONObject.toBean(jsonObject, Orderitem.class);
                 //uid和goodid存在时候修改  查询出该条数据获取id然后存储
-
                 try {
-                    List<Orderitem> order = orderitemService.getAllByUidAndGoodidAndStatus(o.getGoodsid(), o.getUid(),0);
-                    for (Orderitem or:order
-                         ) {
-                        o.setId(or.getId());
+                    List<Orderitem> orderitem= orderitemService.getAllByUidAndGoodidAndStatus(o.getUid(),o.getGoodsid(),0);
+                    if(orderitem.size()!=0){
+                        for (Orderitem or:orderitem
+                             ) {
+                            o.setId(or.getId());
+                            orderitemService.addOrderItem(o);
+                        }
+                    }else{
                         orderitemService.addOrderItem(o);
                     }
+
 
                 } catch (Exception e) {
                     orderitemService.addOrderItem(o);
