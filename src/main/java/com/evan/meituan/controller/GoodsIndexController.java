@@ -62,9 +62,13 @@ public class GoodsIndexController {
                 //uid和goodid存在时候修改  查询出该条数据获取id然后存储
 
                 try {
-                    Orderitem order = orderitemService.getAllByUidAndGoodidAndStatus(o.getGoodsid(), o.getUid(),0);
-                    o.setId(order.getId());
-                    orderitemService.addOrderItem(o);
+                    List<Orderitem> order = orderitemService.getAllByUidAndGoodidAndStatus(o.getGoodsid(), o.getUid(),0);
+                    for (Orderitem or:order
+                         ) {
+                        o.setId(or.getId());
+                        orderitemService.addOrderItem(o);
+                    }
+
                 } catch (Exception e) {
                     orderitemService.addOrderItem(o);
                 }
@@ -84,5 +88,24 @@ public class GoodsIndexController {
         return null;
     }
 
+    /*
+        根据商店内的分类获取商品
+    */
+    @PostMapping(value = "api/getGoodsListBysid")
+    public Page getGoodsBysid(@RequestBody Map<String, Object> ci) {
+        /*用map来接收前端传来的page*/
+        int sc = (int) ci.get("scid");
+        //System.out.println(c);
+        int p = (int) ci.get("page");
+        if(sc==0){
+            //查询该商店所有商品
+            return null;
+        }else{
+            Page l = goodslistService.getGoodsByscid(sc,p);
+            return l;
+        }
+
+
+    }
 
 }

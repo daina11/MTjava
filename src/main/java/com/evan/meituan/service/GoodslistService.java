@@ -25,4 +25,9 @@ public class GoodslistService {
         Page list = goodslistDao.findAllByCid(cid,PageRequest.of(page, 5));
         return list;
     }
+    //根据商店里的分类获取商品
+    public Page getGoodsByscid(int scid,int page){
+        Page list = goodslistDao.findAllByScid(scid,PageRequest.of(page, 5));
+        return list;
+    }
 }

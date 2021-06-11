@@ -35,10 +35,13 @@ public class OrderController {
         String gstr[] = goodstr.split(",");
         for (String k : gstr) {
             int gid = Integer.parseInt(k);
-            Orderitem orderitem = orderitemService.getAllByUidAndGoodidAndStatus(uid, gid, 1);
+            List<Orderitem> orderitem = orderitemService.getAllByUidAndGoodidAndStatus(uid, gid, 0);
+            for (Orderitem oor:orderitem
+                 ) {
+                oor.setStatus(1);
+                orderitemService.addOrderItem(oor);
+            }
 
-            orderitem.setStatus(1);
-            orderitemService.addOrderItem(orderitem);
         }
         return new Result(200);
     }
@@ -62,9 +65,12 @@ public class OrderController {
                 Map<String, String> one = new HashMap();
                 one.put("orderid", String.valueOf(o.getId()));
                 int gid = Integer.parseInt(k);
-                Orderitem oit = orderitemService.getAllByUidAndGoodidAndStatus(uid, gid, 1);
+                List<Orderitem> oit = orderitemService.getAllByUidAndGoodidAndStatus(uid, gid, 1);
+                for (Orderitem orr:oit
+                     ) {
+                    str += orr.getGoodname() + "*" + orr.getGoodsnumber() + "  " + "一共" + orr.getGoodsamout() + "元" + "   ";
+                }
 
-                str += oit.getGoodname() + "*" + oit.getGoodsnumber() + "  " + "一共" + oit.getGoodsamout() + "元" + "   ";
             }
             t.add(str);
         }

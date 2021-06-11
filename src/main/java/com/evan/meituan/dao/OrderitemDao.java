@@ -10,5 +10,6 @@ public interface OrderitemDao extends JpaRepository<Orderitem,Integer> {
         List<Orderitem> findAllByUid(int uid);
         Orderitem deleteById(int id);
         List<Orderitem> findAllByUidAndStatus(int uid ,int s);
-        Orderitem findAllByUidAndGoodsidAndStatus(int uid,int gid,int s);
+        List<Orderitem> findAllByUidAndGoodsidAndStatus(int uid,int gid,int s);
+
 }
