@@ -46,5 +46,15 @@ public class IndexController {
 
     }
 
+   /* 搜索页面关键字查询商店*/
+   @PostMapping(value = "api/getSearchShopsList")
+   public Page getSearchShopsList(@RequestBody Map<String, Object> page) {
+       /*用map来接收前端传来的page*/
+       int p = (int) page.get("page");
+       String kw = String.valueOf(page.get("keywords"));
+       Page goodslist = shopService.getSearchByShopName("%"+kw+"%",p);
+       return goodslist;
+
+   }
 
 }

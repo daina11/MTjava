@@ -1,7 +1,9 @@
 package com.evan.meituan.controller;
 
 import com.evan.meituan.pojo.Result;
+import com.evan.meituan.pojo.Shop;
 import com.evan.meituan.pojo.User;
+import com.evan.meituan.service.ShopService;
 import com.evan.meituan.service.UserService;
 import com.evan.meituan.utils.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -17,6 +19,8 @@ import java.util.Date;
 public class LoginController {
     @Autowired
     UserService userService;
+    @Autowired
+    ShopService shopService;
 
     @PostMapping(value = "api/login")
     public User login(@RequestBody User requestUser) {
@@ -111,6 +115,21 @@ public class LoginController {
             u.setUsername(username);
             userService.add(u);
             return u;
+        }
+
+    }
+
+    /*商家注册*/
+    @PostMapping(value = "api/adminregister")
+    public Result adminregister(@RequestBody Shop shop) {
+        String username = shop.getUsername();
+        username = HtmlUtils.htmlEscape(username);
+
+        if (shopService.isExist(username)) {
+            return new Result(400);
+        } else {
+            shopService.addShop(shop);
+            return new Result(200);
         }
 
     }
