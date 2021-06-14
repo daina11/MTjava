@@ -1,6 +1,7 @@
 package com.evan.meituan.controller;
 
 import com.evan.meituan.pojo.Goodcategory;
+import com.evan.meituan.pojo.Shop;
 import com.evan.meituan.service.GoodslistService;
 import com.evan.meituan.service.ShopService;
 import com.evan.meituan.service.GoodcategoryService;
@@ -56,5 +57,11 @@ public class IndexController {
        return goodslist;
 
    }
+    @PostMapping(value = "api/getShopinfo")
+    public Shop getShopinfo(@RequestBody Map<String, Object> s) {
+        int id = (int) s.get("id");
 
+        return  shopService.getByid(id);
+
+    }
 }

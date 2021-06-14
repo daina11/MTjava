@@ -14,4 +14,10 @@ public class ShopgoodcategoryService {
     public List<Shopgoodcategory> getShopgoodCategoryBysid(int sid){
         return shopgoodcategoryDao.findAllBySid(sid);
     }
+    public void addShopgoodCategory(Shopgoodcategory shopgoodcategory){
+        shopgoodcategoryDao.save(shopgoodcategory);
+    }
+    public Shopgoodcategory getBynameAndSid(String name,int sid){
+        return shopgoodcategoryDao.findByNameAndSid(name,sid);
+    }
 }

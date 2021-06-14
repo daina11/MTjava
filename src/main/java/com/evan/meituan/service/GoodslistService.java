@@ -35,4 +35,13 @@ public class GoodslistService {
         Page l  = goodslistDao.findAllBySid(sid,PageRequest.of(page, 5));
         return l;
     }
+    public void addGoods(Goodslist g){
+        goodslistDao.save(g);
+    }
+    public Goodslist getById(int id){
+        return goodslistDao.findById(id);
+    }
+    public void  deletByid(int id){
+        goodslistDao.deleteById(id);
+    }
 }

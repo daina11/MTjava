@@ -13,7 +13,7 @@ public class Shop {
   @Column(name = "id")
   private int id;
   private String name;
-  private String shopimg;
+  private String shopimg="http://image.mt.com/3ea6beec64369c2642b92c6726f1epng.png";
   private String location;
   private String username;
   private String password;

@@ -33,4 +33,11 @@ public class ShopService {
     public void addShop(Shop shop){
         shopDao.save(shop);
     }
+    public Shop getByUsernameAndPassword(String username,String password){
+        return shopDao.findByUsernameAndPassword(username,password);
+    }
+    public Shop getByid(int id){
+        return shopDao.findById(id);
+    }
+
 }

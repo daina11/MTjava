@@ -9,4 +9,6 @@ public interface ShopDao extends JpaRepository<Shop,Integer> {
     Page<Shop> findAllByNameIsNotNull(Pageable pageable);
     Page<Shop> findAllByNameIsNotNullAndNameLike(String kw,Pageable pageable);
     Shop findByUsername(String username);
+    Shop findById(int id);
+    Shop findByUsernameAndPassword(String username,String password);
 }

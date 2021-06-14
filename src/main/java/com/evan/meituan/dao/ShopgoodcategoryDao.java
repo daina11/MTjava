@@ -7,4 +7,5 @@ import java.util.List;
 
 public interface ShopgoodcategoryDao extends JpaRepository<Shopgoodcategory,Integer> {
     List<Shopgoodcategory> findAllBySid(int sid);
+    Shopgoodcategory findByNameAndSid(String name,int sid);
 }

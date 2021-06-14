@@ -1,8 +1,6 @@
 package com.evan.meituan.controller;
 
-import com.evan.meituan.pojo.Result;
-import com.evan.meituan.pojo.Shop;
-import com.evan.meituan.pojo.User;
+import com.evan.meituan.pojo.*;
 import com.evan.meituan.service.ShopService;
 import com.evan.meituan.service.UserService;
 import com.evan.meituan.utils.StringUtils;
@@ -14,6 +12,7 @@ import org.springframework.web.util.HtmlUtils;
 import java.io.File;
 import java.io.IOException;
 import java.util.Date;
+import java.util.Map;
 
 @RestController
 public class LoginController {
@@ -132,5 +131,43 @@ public class LoginController {
             return new Result(200);
         }
 
+    }
+
+    /*商家登陆*/
+    @PostMapping(value = "api/adminlogin")
+    public RetResult<Shop> adminlogin(@RequestBody Shop requestUser) {
+        // 对 html 标签进行转义，防止 XSS 攻击
+        String username = requestUser.getUsername();
+        username = HtmlUtils.htmlEscape(username);
+
+
+        Shop shop = shopService.getByUsernameAndPassword(username, requestUser.getPassword());
+        if (null == shop) {
+            return RetResponse.makeOKRsp(shop);
+        } else {
+            Shop s = shopService.getByName(username);
+            return RetResponse.makeOKRsp(s);
+        }
+    }
+
+    /*商家封面上传*/
+    @PostMapping(value = "api/shopimg")
+    public RetResult<Shop> updateShopimg(@RequestBody Map<String, Object> s) {
+        int id = (int) s.get("id");
+        Shop shop = shopService.getByid(id);
+        shop.setShopimg(imgUrl);
+        shopService.addShop(shop);
+        return RetResponse.makeOKRsp(shop);
+    }
+
+    /*商家信息编辑修改*/
+    @PostMapping(value = "api/editshopinfo")
+    public RetResult<Shop> editshopinfo(@RequestBody Shop shop) {
+        int id = shop.getId();
+        Shop shop1 = shopService.getByid(id);
+        shop1.setLocation(shop.getLocation());
+        shop1.setName(shop.getName());
+        shopService.addShop(shop1);
+        return RetResponse.makeOKRsp(shop1);
     }
 }
